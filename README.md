@@ -28,7 +28,7 @@ I continuously expand my knowledge in cutting-edge technologies, currently explo
 
 ## 📫 Let's Connect
 Feel free to reach out or collaborate on exciting projects!  
-- **Email:** [imam.sodikin@example.com](mailto:imam.sodikin@example.com)  
+- **Email:** [imamsodikin1108@gmail.com](mailto:imam.sodikin@example.com)  
 - **LinkedIn:** [linkedin.com/in/imamsodikin](https://linkedin.com/in/imamsodikin)  
 - **GitHub:** [github.com/imamsodikin](https://github.com/imamsodikin)  
 
