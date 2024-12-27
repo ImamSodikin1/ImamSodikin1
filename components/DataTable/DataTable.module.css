@@ -1,0 +1,14 @@
+/* Background untuk cell data di tema terang */
+.lightCell {
+  background-color: #f0f0f0; /* Light background */
+}
+
+/* Background untuk cell data di tema gelap */
+.darkCell {
+  background-color: #2d3748; /* Darker background for dark mode */
+}
+
+/* Optional: Styling sel saat hover */
+.lightCell:hover, .darkCell:hover {
+  background-color: #d1d5db; /* Light gray on hover */
+}
