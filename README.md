@@ -3,7 +3,7 @@
 I'm a **Software Engineer** specializing in **Automation and Robotics**. With a strong passion for technology, I strive to build innovative and efficient solutions to enhance workflows and systems. My expertise spans a variety of tools and technologies that are essential for modern automation and robotics applications.
 
 ## 🔧 Skills
-- **Programming Languages:** JavaScript, Python, Go  
+- **Programming Languages:** JavaScript, Python, Java  
 - **Frameworks & Tools:** React, Next.js, NestJS, FastAPI  
 - **Automation & Robotics Tools:** Node-RED, Redis, MQTT  
 - **Database Management:** MongoDB, PostgreSQL  
