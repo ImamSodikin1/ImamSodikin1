@@ -1,9 +1,9 @@
 // pages/api/v1/menu/index.js
+import { sendErrorResponse, sendSuccessResponse } from "@/utils/response";
 import dbConnect from "@/lib/dbConnect";
 import Keluhan from "@/models/Keluhan";
 import handler from "@/lib/handler";
 import Model from "@/utils/Model";
-import { sendErrorResponse, sendSuccessResponse } from "@/utils/response";
 await dbConnect();
 
 const socket = require("socket.io-client");
@@ -23,9 +23,16 @@ const methods = {
 
   async POST(req, res) {
     try {
-      const { judul, jenis, content, tanggalKejadian, kategori, file, anonim } =
-        req.body;
-      console.log(req.body);
+      const { 
+          judul, 
+          jenis, 
+          content, 
+          tanggalKejadian, 
+          kategori, 
+          file, 
+          anonim 
+      } = req.body;
+
       const newKeluhan = await keluhanModel.insertOne({
         judul,
         jenis,
@@ -45,7 +52,7 @@ const methods = {
         true
       );
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error)
       sendErrorResponse(res, "Error create keluhan", error, 400);
     }
   },
@@ -64,15 +71,17 @@ const methods = {
       } = req.body;
 
       const updateKeluhan = await keluhanModel.findOneAndUpdate(
-        { _id },
+        {   _id    },
         {
-          judul,
-          jenis,
-          content,
-          tanggalKejadian,
-          kategori,
-          file,
-          anonim,
+            $set: {
+              judul,
+              jenis,
+              content,
+              tanggalKejadian,
+              kategori,
+              file,
+              anonim,
+            }
         }
       );
 

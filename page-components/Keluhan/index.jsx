@@ -15,13 +15,12 @@ import api from "@/utils/api";
 export function Keluhan() {
   const [modalLoading, setModalLoading] = useState(false);
   const [isAnonim, setAnonim] = useState(false);
-  const [jenis, setJenis] = useState("");
   const [kategori, setKategori] = useState([]);
   const [uploadFile, setUploadFile] = useState(null);
-
-  const judulRef = useRef();
-  const isiLaporanRef = useRef();
-  const tanggalKejadianRef = useRef();
+  const [jenis, setJenis] = useState("");
+  const [judul, setJudul] = useState('')
+  const [laporan, setLaporan] = useState('')
+  const [tanggalKejadian, setTanggalKejadian] = useState('')
 
   useEffect(() => {
     const fectData = async () => {
@@ -43,9 +42,9 @@ export function Keluhan() {
       setModalLoading(true);
       const payload = {
         jenis: jenis,
-        judul: judulRef.current?.value,
-        content: isiLaporanRef.current?.value,
-        tanggalKejadian: tanggalKejadianRef.current?.value,
+        judul,
+        content: laporan,
+        tanggalKejadian,
         kategori: kategori,
         file: uploadFile,
         anonim: isAnonim,
@@ -69,6 +68,9 @@ export function Keluhan() {
       setJenis("");
       setKategori([]);
       setUploadFile(null);
+      setJudul('')
+      setTanggalKejadian('')
+      setKategori('')
     }
   };
 
@@ -88,6 +90,10 @@ export function Keluhan() {
     const fileNames = files.map((file) => file.name); // Ubah objek file menjadi array nama file
     setUploadFile(fileNames);
   };
+
+  const handleChange = (setter) =>  (e) => {
+    setter(e.target.value)
+  }
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -117,25 +123,25 @@ export function Keluhan() {
             <Spacer size={0.5} axis={"vertical"} />
 
             <Input
-              ref={judulRef}
               id={"judl"}
               name={"judul"}
               placeholder={"Ketik Judul Laporan Anda*"}
+              onChange={handleChange(setJudul)}
               type={"text"}
             />
 
             <KeluhanForm
-              ref={isiLaporanRef}
               id={"isiLaporan"}
               name={"isiLaporan"}
+              onChange={handleChange(setLaporan)}
               placeholder={"Ketik Isi Laporan Anda*"}
               type={"text"}
               rows={15}
             />
             <Input
-              ref={tanggalKejadianRef}
               id={"kejadian"}
               name={"kejadian"}
+              onChange={handleChange(setTanggalKejadian)}
               placeholder={"Tanggal Kejadian"}
               type={"date"}
             />

@@ -21,13 +21,12 @@ export function Penduduk() {
   const [tanggalLahir, setTanggalLahir] = useState("");
   const [jenisKelamin, setJeniKelamin] = useState("");
   const [status, setStatus] = useState('')
+  const [kewarganegaraan, setKewarganegaraan] = useState('')
+  const [nama, setNama] = useState('')
+  const [umur, setUmur] = useState('')
+  const [alamat, setAlamat] = useState('')
+  const [pekerjaan, setPekerjaan] = useState('')
   const { theme } = useTheme();
-
-  const nameRef = useRef();
-  const umurRef = useRef();
-  const alamatRef = useRef();
-  const pekerjaanRef = useRef();
-  const kewarganegaraanRef = useRef();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -238,18 +237,19 @@ export function Penduduk() {
       setModalLoading(true);
 
       const payload = {
-          nama: nameRef.current?.value,
-          umur: umurRef.current?.value,
-          jenisKelamin: jenisKelamin,
-          alamat: alamatRef.current?.value,
-          statusPernikahan: statusPernikahan,
+          nama,
+          umur,
+          jenisKelamin,
+          alamat,
+          statusPernikahan,
           kepalaKeluarga,
           tanggalLahir,
-          pekerjaan: pekerjaanRef.current?.value,
-          kewarganegaraan: kewarganegaraanRef.current?.value,
+          pekerjaan,
+          status,
+          kewarganegaraan,
       };
 
-      console.log(payload.nama)
+      console.log(payload)
 
       for (const [key, value] of Object.entries(payload)) {
         if (!value) {
@@ -276,10 +276,10 @@ export function Penduduk() {
       Swal.fire("Error", "Failed to create penduduk", "error");
     } finally {
       setModalLoading(false);
-      setJeniKelamin();
-      setStatusPernikahan();
-      setKepalaKeluarga();
-      setTanggalLahir();
+      // setJeniKelamin();
+      // setStatusPernikahan();
+      // setKepalaKeluarga();
+      // setTanggalLahir();
     }
   };
 
@@ -291,7 +291,9 @@ export function Penduduk() {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, delete it!", 
+      color: theme === "dark" ? "#fff" : "#000",
+      background: theme === "dark" ? "#2d3748" : "#fff",
     })
     if (result.isConfirmed) {
       setModalLoading(true);
@@ -399,19 +401,19 @@ export function Penduduk() {
           <div className="flex flex-col justify-start sm:h-44 md:h-44 lg:h-64 overflow-y-auto p-4">
             <Input 
               label={"Nama"} 
-              ref={nameRef} 
+              onChange={handleChangeSelect(setNama)}
               placeholder={"Masukan Nama"} 
             />
             <Spacer size={0.3} axis={"vertical"} />
             <Input 
               label={"Umur"} 
-              ref={umurRef} 
+              onChange={handleChangeSelect(setUmur)}
               placeholder={"Masukan Umur"} 
             />
             <Spacer size={0.3} axis={"vertical"} />
             <Input
               label={"Alamat"}
-              ref={alamatRef}
+              onChange={handleChangeSelect(setAlamat)}
               placeholder={"Masukan Alamat"}
             />
             <Spacer size={0.3} axis={"vertical"} />
@@ -468,19 +470,19 @@ export function Penduduk() {
               label={"Tanggal Lahir"}
               type={"date"}
               value={tanggalLahir}
-              onChange={(e) => setTanggalLahir(e.target.value)}
+              onChange={handleChangeSelect(setTanggalLahir)}
               placeholder={"Masukan Tanggal Lahir"}
             />
             <Spacer size={0.3} axis={"vertical"} />
             <Input
               label={"Pekerjaan"}
-              ref={pekerjaanRef}
+              onChange={handleChangeSelect(setPekerjaan)}
               placeholder={"Masukan Pekerjaan"}
             />
             <Spacer size={0.3} axis={"vertical"} />
             <Input
               label={"Kewarganegaraan"}
-              ref={kewarganegaraanRef}
+              onChange={handleChangeSelect(setKewarganegaraan)}
               placeholder={"Masukan Kewarganegaraan"}
             />
           </div>

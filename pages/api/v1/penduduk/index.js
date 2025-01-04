@@ -1,9 +1,9 @@
 // pages/api/v1/menu/index.js
+import { sendErrorResponse, sendSuccessResponse } from "@/utils/response";
 import dbConnect from "@/lib/dbConnect";
 import Penduduk from "@/models/Penduduk";
 import handler from "@/lib/handler";
 import Model from "@/utils/Model";
-import { sendErrorResponse, sendSuccessResponse } from "@/utils/response";
 await dbConnect();
 
 const socket = require("socket.io-client");
@@ -35,18 +35,19 @@ const methods = {
         kewarganegaraan,
         status
       } = req.body;
+      console.log(req.body)
 
       const penduduk = await pendudukModel.insertOne({
-        nama,
-        umur,
-        jenisKelamin,
-        alamat,
-        statusPernikahan,
-        kepalaKeluarga,
-        tanggalLahir,
-        pekerjaan,
-        kewarganegaraan,
-        status
+          nama,
+          umur,
+          jenisKelamin,
+          alamat,
+          statusPernikahan,
+          kepalaKeluarga,
+          tanggalLahir,
+          pekerjaan,
+          kewarganegaraan,
+          status
       });
       socketClient.emit("penduduk", penduduk);
       sendSuccessResponse(res, "successfull", penduduk, 200, true);

@@ -8,21 +8,13 @@ const KeluhanSchema = new mongoose.Schema(
     tanggalKejadian: { type: Date },
     kategori: { type: [String], required: true },
     file: {
-      type: [
-        {
-          name: String, // Nama file
-          url: String, // URL file
-        },
-      ],
-      default: [], // Default array kosong
+        type: [String]
     },
     anonim: { type: Boolean, default: false },
   },
   {
-    timestamps: true, // Tambahkan createdAt dan updatedAt otomatis
+    timestamps: true, 
   }
 );
 
-// Perbaiki ekspor model
-export default mongoose.models.Keluhan ||
-  mongoose.model("Keluhan", KeluhanSchema);
+export default mongoose.models.Keluhan || mongoose.model("Keluhan", KeluhanSchema);
