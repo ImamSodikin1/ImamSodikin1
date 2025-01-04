@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
-import CardChart from "@/components/Card/CardChart";
+import Cards from "@/components/Card/Cards";
 import Input from "@/components/Input/Index";
 import Spacer from "@/components/Spacer";
 import RadioButton from "@/components/RadioButton";
@@ -92,7 +92,7 @@ export function Keluhan() {
   return (
     <div className="flex flex-col items-center justify-center">
       <Spacer size={2} axis={"vertical"} />
-      <CardChart
+      <Cards
         className={"w-2/3"}
         classNameChildren={"w-1/2"}
         children={

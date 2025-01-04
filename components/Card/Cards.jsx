@@ -1,4 +1,4 @@
-export default function CardChart({
+export default function Cards({
   children,
   className,
   title,

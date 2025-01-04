@@ -53,17 +53,10 @@ export default function Sidebar({ children }) {
 
   return (
     <SidebarContext.Provider value={{ expanded }}>
-      <aside className="h-screen">
+      <aside>
         <nav className={`h-full flex flex-col  shadow-sm `}>
           <div className="p-4 pb-2 flex justify-between items-center">
-            <Image
-              src="https://img.logoipsum.com/243.svg"
-              width={50}
-              height={50}
-              className={`overflow-hidden transition-all ${expanded ? "w-32" : "w-0"
-                }`}
-              alt="logo"
-            />
+           <span className="text-blue-400 font-semibold uppercase sm:text-xl md:text-2xl ">desaku</span>
             <button
               onClick={() => setExpanded((curr) => !curr)}
               className="p-1.5 rounded-md ">
@@ -150,7 +143,6 @@ export default function Sidebar({ children }) {
             {children}
           </ul>
 
-          {/* Informasi user */}
           <div className={` flex p-3 justify-center items-center border-t dark:border-gray-700 border-gray-200 `}>
             <ThemeSwitcher expanded={expanded} />
           </div>

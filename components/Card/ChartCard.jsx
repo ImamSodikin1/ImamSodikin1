@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
-import { debounce } from 'lodash';
 import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -76,7 +75,7 @@ const CardChart = ({
           breakpoint: 1599,
           options: {
             chart: {
-              width: "500px",
+              width: "600px",
               height: "500px",
             },
           },
@@ -85,7 +84,7 @@ const CardChart = ({
           breakpoint: 1024,
           options: {
             chart: {
-              width: "400px",
+              width: "500px",
               height: "400px",
             },
           },

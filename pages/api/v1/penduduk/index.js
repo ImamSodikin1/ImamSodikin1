@@ -33,6 +33,7 @@ const methods = {
         tanggalLahir,
         pekerjaan,
         kewarganegaraan,
+        status
       } = req.body;
 
       const penduduk = await pendudukModel.insertOne({
@@ -45,6 +46,7 @@ const methods = {
         tanggalLahir,
         pekerjaan,
         kewarganegaraan,
+        status
       });
       socketClient.emit("penduduk", penduduk);
       sendSuccessResponse(res, "successfull", penduduk, 200, true);
@@ -66,20 +68,24 @@ const methods = {
         tanggalLahir,
         pekerjaan,
         kewarganegaraan,
+        status,
       } = req.body;
 
       const penduduk = await pendudukModel.findOneAndUpdate(
         { _id: _id },
         {
-          name,
-          umur,
-          jenisKelamin,
-          alamat,
-          statusPernikahan,
-          kepalaKeluarga,
-          tanggalLahir,
-          pekerjaan,
-          kewarganegaraan,
+           $set:  {
+              name,
+              umur,
+              jenisKelamin,
+              alamat,
+              statusPernikahan,
+              kepalaKeluarga,
+              tanggalLahir,
+              pekerjaan,
+              kewarganegaraan,
+              status
+          }
         }
       );
       socketClient.emit("penduduk");

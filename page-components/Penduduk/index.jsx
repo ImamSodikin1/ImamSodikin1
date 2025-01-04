@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 import api from "@/utils/api";
 import DataTable from "@/components/DataTable";
-import Button from "@/components/Button";
 import Spacer from "@/components/Spacer";
 import Modal from "@/components/Modal";
 import Input from "@/components/Input/Index";
@@ -9,19 +9,18 @@ import ModalLoadingCircular from "@/components/Modal/ModalLoadingCIrcular";
 import Swal from "sweetalert2";
 import io from "socket.io-client";
 import Select from "@/components/Select";
-import { useTheme } from "next-themes";
-import Swaler from "@/components/Modal/Swal";
 
 export function Penduduk() {
   const [modalAddPenduduk, setModalAddPenduduk] = useState(false);
   const [modalEditPenduduk, setModalEditPenduduk] = useState(false);
   const [modalLoading, setModalLoading] = useState(false);
   const [selectedValues, setSelectedValues] = useState([]);
-  const [jenisKelamin, setJeniKelamin] = useState("");
+  const [dataPenduduk, setDataPenduduk] = useState([]);
   const [statusPernikahan, setStatusPernikahan] = useState();
   const [kepalaKeluarga, setKepalaKeluarga] = useState();
   const [tanggalLahir, setTanggalLahir] = useState("");
-  const [dataPenduduk, setDataPenduduk] = useState([]);
+  const [jenisKelamin, setJeniKelamin] = useState("");
+  const [status, setStatus] = useState('')
   const { theme } = useTheme();
 
   const nameRef = useRef();
@@ -239,16 +238,18 @@ export function Penduduk() {
       setModalLoading(true);
 
       const payload = {
-        nama: nameRef.current?.value,
-        umur: umurRef.current?.value,
-        jenisKelamin: jenisKelamin,
-        alamat: alamatRef.current?.value,
-        statusPernikahan: statusPernikahan,
-        kepalaKeluarga,
-        tanggalLahir,
-        pekerjaan: pekerjaanRef.current?.value,
-        kewarganegaraan: kewarganegaraanRef.current?.value,
+          nama: nameRef.current?.value,
+          umur: umurRef.current?.value,
+          jenisKelamin: jenisKelamin,
+          alamat: alamatRef.current?.value,
+          statusPernikahan: statusPernikahan,
+          kepalaKeluarga,
+          tanggalLahir,
+          pekerjaan: pekerjaanRef.current?.value,
+          kewarganegaraan: kewarganegaraanRef.current?.value,
       };
+
+      console.log(payload.nama)
 
       for (const [key, value] of Object.entries(payload)) {
         if (!value) {
@@ -256,7 +257,7 @@ export function Penduduk() {
           return Swal.fire({
             icon: "warning",
             title: "Warning",
-            text: `${key} is required`,
+            text: `${key} tidak boleh kosong!`,
             color: theme === "dark" ? "#fff" : "#000",
             background: theme === "dark" ? "#2d3748" : "#fff",
           });
@@ -283,29 +284,26 @@ export function Penduduk() {
   };
 
   const handleDeletePenduduk = async (data) => {
-    // const result = await Swaler({
-    //   title: "Are you sure?",
-    //   text: `You won't be able to revert this ? ${data[1]}`,
-    //   icon: "warning",
-    //   showCancelButton: true,
-    //   confirmButtonColor: "#3085d6",
-    //   cancelButtonColor: "#d33",
-    //   confirmButtonText: "Yes, delete it!",
-    // });
-
-    // const result = await Swal.fire({
-    //   title: "Are you sure?",
-    //   text: `You won't be able to revert this ? ${data[1]}`,
-    //   icon: "warning",
-    //   showCancelButton: true,
-    //   confirmButtonColor: "#3085d6",
-    //   cancelButtonColor: "#d33",
-    //   confirmButtonText: "Yes, delete it!",
-    // })
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: `You won't be able to revert this ? ${data[1]}`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    })
     if (result.isConfirmed) {
       setModalLoading(true);
       try {
         const response = await api.delete(`v1/penduduk?_id=${data[0]}`);
+        const { status, message } = response.data
+
+        Swal.fire(
+          status ? 'Success' : 'Warning',
+          message,
+          status ? 'success' : 'warning'
+        )
       } catch (error) {
         Swal.fire("Error", "Failed to delete penduduk", "error");
       } finally {
@@ -380,10 +378,11 @@ export function Penduduk() {
 
   return (
     <div>
-      <Button onClick={() => setModalAddPenduduk(true)}>Tambah</Button>
-      <Spacer size={0.5} axis={"vertical"} />
+      <Spacer size={1} axis={"vertical"} />
       <DataTable
         pageSize={8}
+        button={'Tambah Data'}
+        onClick={() => setModalAddPenduduk(true)}
         title={"Data Penduduk"}
         columns={columns}
         data={dataPenduduk}
@@ -398,10 +397,17 @@ export function Penduduk() {
         onClick={handleCreatePenduduk}
         content={
           <div className="flex flex-col justify-start sm:h-44 md:h-44 lg:h-64 overflow-y-auto p-4">
-            <Input label={"Nama"} ref={nameRef} placeholder={"Masukan Nama"} />
+            <Input 
+              label={"Nama"} 
+              ref={nameRef} 
+              placeholder={"Masukan Nama"} 
+            />
             <Spacer size={0.3} axis={"vertical"} />
-            <Input label={"Umur"} ref={umurRef} placeholder={"Masukan Umur"} />
-            <Spacer size={0.3} axis={"vertical"} />
+            <Input 
+              label={"Umur"} 
+              ref={umurRef} 
+              placeholder={"Masukan Umur"} 
+            />
             <Spacer size={0.3} axis={"vertical"} />
             <Input
               label={"Alamat"}
@@ -436,15 +442,24 @@ export function Penduduk() {
             />
             <Spacer size={0.3} axis={"vertical"} />
             <Select
-              id="exampleSelect"
               label="Kepala Keluarga"
-              name="exampleSelect"
               plcaeholder={"Kepala Keluarga"}
               value={kepalaKeluarga}
               onChange={handleChangeSelect(setKepalaKeluarga)}
               options={[
                 { label: "No", value: false },
                 { label: "Yes", value: true },
+              ]}
+            />
+            <Spacer size={0.3} axis={"vertical"} />
+            <Select
+              label="Status Hidup"
+              plcaeholder={"Status Hidup"}
+              value={status}
+              onChange={handleChangeSelect(setStatus)}
+              options={[
+                { label: "Hidup", value: 'hidup' },
+                { label: "Meninggal", value: 'meninggal' },
               ]}
             />
             <Spacer size={0.3} axis={"vertical"} />
@@ -537,6 +552,19 @@ export function Penduduk() {
               options={[
                 { label: "No", value: false },
                 { label: "Yes", value: true },
+              ]}
+            />
+            <Spacer size={0.3} axis={"vertical"} />
+            <Select
+              id="status"
+              label="Status Hidup"
+              name="statusHidup"
+              plcaeholder={selectedValues[8]}
+              value={selectedValues[8]}
+              onChange={(e) => handleChange(8, e.target.value)}
+              options={[
+                { label: "Hidup", value: 'hidup' },
+                { label: "Meninggal", value: 'meninggal' },
               ]}
             />
             <Spacer size={0.3} axis={"vertical"} />

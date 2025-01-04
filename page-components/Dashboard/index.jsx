@@ -1,19 +1,10 @@
 import Card from "@/components/Card";
 import CardChart from "@/components/Card/ChartCard";
 import Spacer from "@/components/Spacer";
-import dynamic from "next/dynamic";
 import Table from "@/components/DataTable/Table";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-
 export function Dashboard() {
-  const chartOptions = {
-    chart: { id: "basic-line" },
-    xaxis: { categories: ["Jan", "Feb", "Mar", "Apr"] },
-  };
-  const chartSeries = [{ name: "Series 1", data: [30, 40, 35, 50] }];
-
   const seriesData = [
     {
       name: "User 1",
@@ -34,71 +25,70 @@ export function Dashboard() {
   ];
 
   const columns = [
-    { header: "Nama", field: "name" },
-    { header: "Email", field: "email" },
-    { header: "Status", field: "status", render: (value) => (value ? "Aktif" : "Nonaktif") },
+    { header: "Nama", accessor: "name" },
+    { header: "Email", accessor: "email" },
+    { header: "Status", accessor: "status" },
   ];
 
   const data = [
-    { name: "John Doe", email: "john@example.com", status: true },
-    { name: "Jane Doe", email: "jane@example.com", status: false },
-    { name: "Alice Smith", email: "alice@example.com", status: true },
+    { name: "John Doe", email: "john@example.com", status: 'Yes' },
+    { name: "Jane Doe", email: "jane@example.com", status: 'Yes' },
+    { name: "Alice Smith", email: "alice@example.com", status: 'False' },
   ];
-
 
   return (
     <div className="min-h-screen p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <CardChart
-            icon={<FaArrowUp />}
-            title="Data Kesehatan"
-            // data="$410.5"
-            percentage="1.1%"
-            isIncreasing={true}
-            type={'radar'}
-            series={seriesData}
-            labels={["Offline", "Online", "Exception", 'Brow', 'William']}
-            colors={["#00E396", "#FEB019", "#FF4560", "#775DD0"]}
+          icon={<FaArrowUp />}
+          title="Data Kesehatan"
+          // data="$410.5"
+          percentage="1.1%"
+          isIncreasing={true}
+          type={"radar"}
+          series={seriesData}
+          labels={["Offline", "Online", "Exception", "Brow", "William"]}
+          colors={["#00E396", "#FEB019", "#FF4560", "#775DD0"]}
         />
 
         <CardChart
-            icon={<FaArrowUp />}
-            title="Data Penduduk"
-            // data="$410.5"
-            percentage="1.1%"
-            isIncreasing={true}
-            type={'donut'}
-            series={[20,20,40]}
-            labels={["Offline", "Online", "Exception"]}
-            colors={["#775DD0", "#FEB019", "#FF4560"]}
-        />
-
-       <CardChart
-            icon={<FaArrowUp />}
-            title="Data Penduduk"
-            // data="$410.5"
-            percentage="1.1%"
-            isIncreasing={true}
-            type={'radialBar'}
-            series={[20,20,40]}
-            labels={["Offline", "Online", "Exception"]}
-            colors={["#775DD0", "#FEB019", "#FF4560"]}
+          icon={<FaArrowUp />}
+          title="Data Penduduk"
+          // data="$410.5"
+          percentage="1.1%"
+          isIncreasing={true}
+          type={"donut"}
+          series={[20, 20, 40]}
+          labels={["Offline", "Online", "Exception"]}
+          colors={["#775DD0", "#FEB019", "#FF4560"]}
         />
 
         <CardChart
-            icon={<FaArrowUp />}
-            title="Data Penduduk"
-            // data="$410.5"
-            percentage="1.1%"
-            isIncreasing={true}
-            type={'polarArea'}
-            series={[20,20,40]}
-            labels={["Offline", "Online", "Exception"]}
-            colors={["#775DD0", "#FEB019", "#FF4560"]}
+          icon={<FaArrowUp />}
+          title="Data Penduduk"
+          // data="$410.5"
+          percentage="1.1%"
+          isIncreasing={true}
+          type={"radialBar"}
+          series={[20, 20, 40]}
+          labels={["Offline", "Online", "Exception"]}
+          colors={["#775DD0", "#FEB019", "#FF4560"]}
+        />
+
+        <CardChart
+          icon={<FaArrowUp />}
+          title="Data Penduduk"
+          // data="$410.5"
+          percentage="1.1%"
+          isIncreasing={true}
+          type={"polarArea"}
+          series={[20, 20, 40]}
+          labels={["Offline", "Online", "Exception"]}
+          colors={["#775DD0", "#FEB019", "#FF4560"]}
         />
       </div>
       <Spacer size={0.5} />
-      <div className=" grid grid-cols-1 lg:grid-cols-3 gap-2">
+      <div className=" grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="lg:col-span-2  p-6 rounded-lg dark:bg-gray-900 bg-white">
           <h3 className="text-lg font-semibold  mb-4">Total Investment</h3>
           <div className="flex justify-between items-center mb-4">
@@ -111,11 +101,17 @@ export function Dashboard() {
               <p className="text-xl font-bold text-green-500">$22,543.87</p>
             </div>
           </div>
-          <Chart
-            options={chartOptions}
-            series={chartSeries}
-            type="line"
-            height={250}
+
+          <CardChart
+            icon={<FaArrowUp />}
+            title="Data Penduduk"
+            // data="$410.5"
+            percentage="1.1%"
+            isIncreasing={true}
+            type='donut'
+            series={[20, 20, 40]}
+            labels={["Offline", "Online", "Exception"]}
+            colors={["#775DD0", "#FEB019", "#FF4560"]}
           />
         </div>
 
@@ -179,21 +175,15 @@ export function Dashboard() {
           </div>
         </div>
       </div>
-      
+
       <Spacer size={0.5} />
-      <div className="flex justify-center items-center">
-            <Card
-              title={'Data Donasi'}
-              content={
-                <>
-                  <Table
-                    columns={columns}
-                    data={data}
-                  />
-                </>
-              }
-            />
-        </div>
+      <div className="flex w-full dark:bg-gray-900 bg-white p-6 rounded-lg">
+        <Table
+            columns={columns} 
+            data={data} 
+            title={"Data Donasi"}
+        />
+      </div>
     </div>
   );
 }
