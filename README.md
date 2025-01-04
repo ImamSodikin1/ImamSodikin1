@@ -1,40 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Hi there! 👋 I'm Imam Sodikin
 
-## Getting Started
+I'm a **Software Engineer** specializing in **Automation and Robotics**. With a strong passion for technology, I strive to build innovative and efficient solutions to enhance workflows and systems. My expertise spans a variety of tools and technologies that are essential for modern automation and robotics applications.
 
-First, run the development server:
+## 🔧 Skills
+- **Programming Languages:** JavaScript, Python, Java  
+- **Frameworks & Tools:** React, Next.js, NestJS, FastAPI  
+- **Automation & Robotics Tools:** Node-RED, Redis, MQTT  
+- **Database Management:** MongoDB, PostgreSQL  
+- **Other Technologies:** Docker, Kubernetes, GitHub Actions  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌟 Featured Projects
+Here are some of the projects that showcase my expertise:  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **[Automated Warehouse System](#)**  
+  Developed an end-to-end solution for warehouse automation using Node-RED and Redis for real-time data flow.  
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- **[Robot Control Management System](#)**  
+  Built a scalable platform for managing robotics tasks, leveraging FastAPI and MQTT for communication between devices.  
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- **[Dashboard for Robotics Monitoring](#)**  
+  Designed a responsive dashboard using React and Next.js for real-time monitoring of robotic operations.  
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## 🌱 What I'm Learning
+I continuously expand my knowledge in cutting-edge technologies, currently exploring:  
+- Advanced robotics frameworks  
+- Edge computing for automation  
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📫 Let's Connect
+Feel free to reach out or collaborate on exciting projects!  
+- **Email:** [imamsodikin1108@gmail.com](mailto:imam.sodikin@example.com)  
+- **LinkedIn:** [linkedin.com/in/imamsodikin](https://linkedin.com/in/imamsodikin)  
+- **GitHub:** [github.com/imamsodikin](https://github.com/imamsodikin)  
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+⭐ "Automation is not just about simplifying tasks—it's about unlocking endless possibilities."  
